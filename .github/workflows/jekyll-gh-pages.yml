@@ -35,7 +35,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Build Angular app with AOT
-        run: npm run ng build --aot
+        run: npm run ng build --aot --base-href= /FRONTEND/
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Build with Jekyll
