@@ -55,3 +55,15 @@ jobs:
         run: |
           export GOOGLE_APPLICATION_CREDENTIALS=google-creds.json
           gupload --to ${{ secrets.GDRIVE_FOLDER_ID }} --file "Package-${{ env.branch_name}}-${{ env.current_time}}.tar.gz" ./prepackage/PrePackage.tar.gz
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Publicar a GitHub pages
+        run: |
+          git config --global user.email "4970-covi"
+          git config --global user.name "Byron Jutzutz & Jonás Rangel"
+          npm i -g @peaceiris/actions-gh-pages
+          build_dir=./dist/pastelesfe
+          npx gh-pages --dist $build_dir
