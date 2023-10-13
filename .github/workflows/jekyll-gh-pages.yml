@@ -59,6 +59,5 @@ jobs:
       - name: Subir archivo a Google Drive
         run: |
           export GOOGLE_APPLICATION_CREDENTIALS=google-creds.json
-          sudo export GOOGLE_APPLICATION_CREDENTIALS=google-creds.json
           gupload --to ${{ secrets.GDRIVE_FOLDER_ID }} --file PrePackage.tar.gz PrePackage.tar.gz
         
