@@ -61,7 +61,7 @@ jobs:
     needs: build
     steps:
       - name: Publicar en GitHub Pages
-        uses: actions/deploy-pages@v3
+        uses: actions/deploy-pages@v2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist/pastelesfe/
