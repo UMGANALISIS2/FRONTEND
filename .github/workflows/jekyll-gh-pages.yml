@@ -55,23 +55,12 @@ jobs:
         run: |
           export GOOGLE_APPLICATION_CREDENTIALS=google-creds.json
           gupload --to ${{ secrets.GDRIVE_FOLDER_ID }} --file "Package-${{ env.branch_name}}-${{ env.current_time}}.tar.gz" ./prepackage/PrePackage.tar.gz
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
-      - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@v1
-        with:
-          source: ./dist/pastelesfe/
-          destination: ./_site
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
+      - name: Publicar en GitHub Pages
+        run: |
+          REPO_DIR="dist/your-project-name"
+          git config --local user.email "bjutzutz@miumg.edu.gt"
+          git config --local user.name "Byron, Miriam y Jonás"
+          git add $REPO_DIR
+          git commit -m "Despliegue de la última versión"
+          git subtree split --prefix $REPO_DIR -b gh-pages
+          git push -f origin gh-pages:gh-pages
