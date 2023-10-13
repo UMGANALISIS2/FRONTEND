@@ -40,9 +40,9 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: dist
-          path: Package.taz.gz
+          path: PrePackage.tar.gz
       - name: Generar enlace de descarga
         id: download-link
-        run: echo "::set-output name=download_link::https://github.com/${{ github.repository }}/actions/artifacts/${{ steps.upload_package.outputs.artifact_name }}/Package.taz.gz"
+        run: echo "https://github.com/${{ github.repository }}/actions/artifacts/${{ steps.upload_package.outputs.artifact_name }}/PrePackage.tar.gz"
       
         
