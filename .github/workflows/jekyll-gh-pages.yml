@@ -35,22 +35,16 @@ jobs:
       - name: Crear paquete
         id: create_package
         run: tar -zcvf PrePackage.tar.gz ./dist/pastelesfe/
-      - name: Instalar gdrive
+      - name: Instalar gupload
         run: |
-          wget -O gdrive_linux-x64.tar.gz https://github.com/glotlabs/gdrive/releases/download/3.9.0/gdrive_linux-x64.tar.gz
-          tar -xf gdrive_linux-x64.tar.gz
-          chmod +x gdrive
-          sudo mv gdrive /usr/local/bin/
-        shell: bash
-      - name: Subir paquete a Drive
-        env: 
-          GDRIVE_ACCESS_TOKEN: ${{ secrets.GDRIVE_ACCESS_TOKEN }}
+          sudo apt-get update
+          sudo apt-get install -y python3-pip
+          pip3 install gupload
+          export PATH=$PATH:~/.local/bin
+          
+      - name: Subir archivo a Google Drive
+        env:
+          GDRIVE_FOLDER_ID: ${{ secrets.GDRIVE_FOLDER_ID }}
         run: |
-          gdrive upload --token "$GDRIVE_ACCESS_TOKEN" PrePackage.tar.gz
-      - name: Generar enlace de descarga
-        id: download-link
-        run: |
-            GDRIVE_FILE_ID=$(gdrive list --query "name='PrePackage.tar.gz'" --no-header | awk '{ print $1 }')
-            echo "https://drive.google.com/uc?export=download&id=${GDRIVE_FILE_ID}"
-      
+          gupload --to "$GDRIVE_FOLDER_ID" PrePackage.tar.gz
         
