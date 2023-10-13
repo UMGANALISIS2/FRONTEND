@@ -60,10 +60,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Publicar a GitHub pages
-        run: |
-          git config --global user.email "4970-covi"
-          git config --global user.name "Byron Jutzutz & Jonás Rangel"
-          npm i -g @peaceiris/actions-gh-pages
-          build_dir=./dist/pastelesfe
-          npx gh-pages --dist $build_dir
+      - name: Publicar en GitHub Pages
+        uses: ./.github/actions/github-pages-deploy  # Ruta al submódulo de la acción
+        with:
+          branch: gh-pages  # La rama en la que se publicará GitHub Pages
+          folder: ./dist/pastelesfe/
