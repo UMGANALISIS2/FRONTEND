@@ -26,6 +26,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
+      - name: Configurar credenciales de Google Cloud
+        run: echo "${{ secrets.GDRIVE_CREDS }}" > google-creds.json
       - name: Instalar Angular CLI
         run: npm i -g @angular/cli
       - name: Instalar dependencias
@@ -44,7 +46,7 @@ jobs:
           
       - name: Subir archivo a Google Drive
         env:
-          GDRIVE_FOLDER_ID: ${{ secrets.GDRIVE_FOLDER_ID }}
+            GDRIVE_FOLDER_ID: ${{ secrets.GDRIVE_FOLDER_ID }}
         run: |
-          gupload --to "$GDRIVE_FOLDER_ID" PrePackage.tar.gz
+            gupload --to "$GDRIVE_FOLDER_ID" PrePackage.tar.gz --service-account google-creds.json
         
