@@ -43,6 +43,6 @@ jobs:
           path: PrePackage.tar.gz
       - name: Generar enlace de descarga
         id: download-link
-        run: echo "https://github.com/${{ github.repository }}/actions/artifacts/${{ steps.upload_package.outputs.artifact_name }}/PrePackage.tar.gz"
+        run: echo "https://github.com/${{ github.repository }}/actions/artifacts/dist/PrePackage.tar.gz"
       
         
