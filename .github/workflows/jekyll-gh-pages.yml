@@ -49,8 +49,9 @@ jobs:
           export PATH=$PATH:~/.local/bin
           echo $json_creds >> google-creds.json
       - name: Subir archivo a Google Drive
+        env: 
+          branch_name: ${{ github.ref_name }}
+          current_time: $(date +"%Y%m%d%H%M%S")
         run: |
-          cat google-creds.json
           export GOOGLE_APPLICATION_CREDENTIALS=google-creds.json
-          gupload --to ${{ secrets.GDRIVE_FOLDER_ID }} --file PrePackage.tar.gz ./prepackage/PrePackage.tar.gz
-        
+          gupload --to ${{ secrets.GDRIVE_FOLDER_ID }} --file "Package-${{ env.branch_name}}-${{ env.current_time}}.tar.gz" ./prepackage/PrePackage.tar.gz
