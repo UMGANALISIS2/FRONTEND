@@ -30,18 +30,22 @@ jobs:
         run: npm i -g @angular/cli
       - name: Instalar dependencias
         run: npm install
+      - name: Crear directorio para paquete
+        run: mkdir prepackage
       - name: Generar paquete
         run: ng build --aot --base-href /frontend/
       - name: Crear paquete
         id: create_package
         run: tar -zcvf PrePackage.tar.gz ./dist/pastelesfe/
+      - name: Mover paquete
+        run: mv PrePackage.tar.gz prepackage/
       - name: Instalar gupload
         run: |
           sudo apt-get update
           sudo apt-get install -y python3-pip
           pip3 install gupload
           export PATH=$PATH:~/.local/bin
-          echo "{
+          echo {
             "type": "service_account",
             "project_id": "prepackage",
             "private_key_id": "5cbbb9fed90a62dd963597bdf4a818fb23b1fff5",
@@ -53,11 +57,12 @@ jobs:
             "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
             "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/pyupl-ubug%40prepackage.iam.gserviceaccount.com",
             "universe_domain": "googleapis.com"
-          }"
+          }
            >> google-creds.json
           
       - name: Subir archivo a Google Drive
         run: |
+          cat google-creds.json
           export GOOGLE_APPLICATION_CREDENTIALS=google-creds.json
-          gupload --to ${{ secrets.GDRIVE_FOLDER_ID }} --file PrePackage.tar.gz PrePackage.tar.gz
+          gupload --to ${{ secrets.GDRIVE_FOLDER_ID }} --file PrePackage.tar.gz ./prepackage/PrePackage.tar.gz
         
