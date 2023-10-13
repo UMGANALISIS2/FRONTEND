@@ -26,10 +26,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-      - name: Configurar credenciales de Google Cloud
-        run: echo "${{ secrets.GDRIVE_CREDS }}" > google-creds.json
-      - name: Global Credentials
-        run: export GOOGLE_APPLICATION_CREDENTIALS=google-creds.json
       - name: Instalar Angular CLI
         run: npm i -g @angular/cli
       - name: Instalar dependencias
@@ -45,6 +41,11 @@ jobs:
           sudo apt-get install -y python3-pip
           pip3 install gupload
           export PATH=$PATH:~/.local/bin
+      - name: Export de env variable
+        run: |
+          echo "${{ secrets.GDRIVE_CREDS }}" >> google-creds.json
+      - name: Global Credentials
+        run: export GOOGLE_APPLICATION_CREDENTIALS=./google-creds.json
       - name: Subir archivo a Google Drive
         run: |
             gupload --to ${{ secrets.GDRIVE_FOLDER_ID }} --file PrePackage.tar.gz PrePackage.tar.gz
