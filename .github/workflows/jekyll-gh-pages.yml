@@ -1,4 +1,4 @@
-name: Deploy to Github Pages
+name: Generar paquete para descarga
 
 on:
   push:
@@ -32,21 +32,17 @@ jobs:
         run: npm install
       - name: Generar paquete
         run: ng build --aot --base-href /frontend/
-      - name: Create Package
+      - name: Crear paquete
         id: create_package
-        run: |
-          tar -zcvf PrePackage.tar.gz ./dist/pastelesfe/
-          echo "::set-output name=package_path::PrePackage.tar.gz"
+        run: tar -zcvf PrePackage.tar.gz ./dist/pastelesfe/
       - name: Subir paquete
+        id: upload_package
         uses: actions/upload-artifact@v3
         with:
           name: dist
           path: Package.taz.gz
-      - name: Generate Download Link
-        id: download
-        run: echo "Download the package [here](./${{ steps.create_package.outputs.package_path}})"
-      - name: Set Output
-        id: set_output
-        run: echo "::set-output name=download_link::${{ steps.download.outputs.download }}"
+      - name: Generar enlace de descarga
+        id: download-link
+        run: echo "::set-output name=download_link::https://github.com/${{ github.repository }}/actions/artifacts/${{ steps.upload_package.outputs.artifact_name }}/Package.taz.gz"
       
         
