@@ -35,6 +35,13 @@ jobs:
       - name: Crear paquete
         id: create_package
         run: tar -zcvf PrePackage.tar.gz ./dist/pastelesfe/
+      - name: Instalar gdrive
+        run: |
+          wget -O gdrive_linux-x64.tar.gz https://github.com/glotlabs/gdrive/releases/download/3.9.0/gdrive_linux-x64.tar.gz
+          tar -xf gdrive_linux-x64.tar.gz
+          chmod +x gdrive
+          sudo mv gdrive /usr/local/bin/
+        shell: bash
       - name: Subir paquete a Drive
         env: 
           GDRIVE_ACCESS_TOKEN: ${{ secrets.GDRIVE_ACCESS_TOKEN }}
