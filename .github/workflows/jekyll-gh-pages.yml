@@ -41,7 +41,20 @@ jobs:
           sudo apt-get install -y python3-pip
           pip3 install gupload
           export PATH=$PATH:~/.local/bin
-          echo "${{ secrets.GDRIVE_CREDS }}" >> google-creds.json
+          echo "{
+            "type": "service_account",
+            "project_id": "prepackage",
+            "private_key_id": "5cbbb9fed90a62dd963597bdf4a818fb23b1fff5",
+            "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDEgR671dYq6KAN\nHmjeMAthiRX4dvH8K5241LMK3UUAsJxmgZyxHAqMo8OnisLL9gPWmanaOUXK0Up9\nO2WQJQKmoUH05g4nOYsb6i773m+krnTEdAJHuaYp+IcfG2GRkkFgJ92whjk8oelA\nJoO4mK6PmSc04Y7bxvjDUJAj19zlFDhMIMvrONlp9yPhzBjpji06agmhDvNgcuFz\ns7nOgap7xIkqO/WgkGItlm1pjDOz+QqxLUhEIhv17WOjBpKP9Kgp5PpGBe346ogN\n9rY8+a8YMGNqDif5hxA9YW7XeQnDf36PpAjuoXhU1Jh0RDopFjsK3wobknbuCKzh\nRppKkoX9AgMBAAECggEAKIxqXqFACeepyzs4sYyhdJV4oqZMxdfsOm0tqvLA3+UR\nyPc68bMTHDVY1NRF4ReZcCmSSpUh6Tmp0NC2Yvm4I9FHznTAe+icY3y+CDw8tnNH\nZhh4NfvBpYyCuXEJf6P5+JERZnE0E2ZnvtSTvr5G2xvj4r4eoAxdXdRcggDztJNM\nRwFOVhp27bzOYcI+aQNyvp4TIIBqSqphvS6rnNXlKOYBvxeZNruxQgD6zd415ngT\naT+fy2vg2ftT0vqyuFrvOkfHjv44lZ3jdhti/WfNiArHWLEV1z8GNdXU0KpAQUsG\nA3ENdOuUekiBvXHiqck+mC/lC362CFmdk1wCHtl0EwKBgQDwaRNIO/Kc9d66w5st\nWupHkwme1IUpOBJG/HdisaLWER6xFNLkyrXODBnVmrpXDRpGX5FpgcC9Pg0W/Brj\nwnuChzfq4wJtnHly4mHWSFPdak67K2hpAAYfJLCAqaEHm08wYmGx27suKiYiCEKf\nm/J0G9V11HYp+dUNhzT0N7VdUwKBgQDRPy7+wBjyC5Z5BwJIado4qSGOMlfRgEQf\n/zFYiExPwkzSrV+/FHAuxC+F6ZYmzodtEt1bks5TcrZE3bG3IX28aK8NAYJls4Ux\nwTA0BK90pCLYRU15iHc2a7oSG7n8qDAqxNSa0ylZ6Ny1ShTQzS6FqhNaJ7+GKzDG\nYGPVcHPVbwKBgQDd4q0IQ0QFuCvMxlKHhtyqGLyNWmpYg8biu4tYjMjUuFJSb/zB\na5JmzOZfLoKDa7VvdC8aaMZCI24jY6VRxyMFctWaNdD856lz7hsMkg7NUZu+xi6E\nkqATyGIbLfRQt/hbmMHATSQyVHaDfIo5E86veS0HpoM09L+9z6eBK5V5vwKBgQDI\nU3xTimeXez6RGgO2fhjcvBeTAmGPAgS2uWNtxfeBOJzB6hhLYG7SZyK0SuBkwL9o\nznG8FP2RaLZVkgVtNRQih/pnMjW71jXDX5gdhQrRWb6+XQMCQoMXR+V5JrBV0lNi\n7tQ4cccZ+9UpfwYUrQtIDn6+hmVXNwxYL7oEgsdy4wKBgBEP2b7el4NjcXhBqC2O\nnZAT56DMqMSQybsq22R+GYzvqY5Pfn9Eu9f3925q8vPci1YTF5wH7OrxhjJpMKuu\noJp79eiy8kjXCh51V0UekR8lzEaUYfHPCIElj+DUuXQioeebwIvv9yCbSFloMAb/\nLP+n5twgAAIGe8w9YoNBZyc5\n-----END PRIVATE KEY-----\n",
+            "client_email": "pyupl-ubug@prepackage.iam.gserviceaccount.com",
+            "client_id": "100510404277089331787",
+            "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+            "token_uri": "https://oauth2.googleapis.com/token",
+            "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+            "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/pyupl-ubug%40prepackage.iam.gserviceaccount.com",
+            "universe_domain": "googleapis.com"
+          }"
+           >> google-creds.json
           cat google-creds.json
           export GOOGLE_APPLICATION_CREDENTIALS=google-creds.json
       - name: Subir archivo a Google Drive
