@@ -33,7 +33,7 @@ jobs:
       - name: Crear directorio para paquete
         run: mkdir prepackage
       - name: Generar paquete
-        run: ng build --aot --base-href /frontend/
+        run: ng build --aot 
       - name: Crear paquete
         id: create_package
         run: tar -zcvf PrePackage.tar.gz ./dist/pastelesfe/
