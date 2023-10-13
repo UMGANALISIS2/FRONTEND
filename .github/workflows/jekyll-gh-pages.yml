@@ -35,14 +35,15 @@ jobs:
       - name: Crear paquete
         id: create_package
         run: tar -zcvf PrePackage.tar.gz ./dist/pastelesfe/
-      - name: Subir paquete
-        id: upload_package
-        uses: actions/upload-artifact@v3
-        with:
-          name: dist
-          path: PrePackage.tar.gz
+      - name: Subir paquete a Drive
+        env: 
+          GDRIVE_ACCESS_TOKEN: ${{ secrets.GDRIVE_ACCESS_TOKEN }}
+        run: |
+          gdrive upload --token "$GDRIVE_ACCESS_TOKEN" PrePackage.tar.gz
       - name: Generar enlace de descarga
         id: download-link
-        run: echo "https://github.com/${{ github.repository }}/actions/artifacts/dist/PrePackage.tar.gz"
+        run: |
+            GDRIVE_FILE_ID=$(gdrive list --query "name='PrePackage.tar.gz'" --no-header | awk '{ print $1 }')
+            echo "https://drive.google.com/uc?export=download&id=${GDRIVE_FILE_ID}"
       
         
