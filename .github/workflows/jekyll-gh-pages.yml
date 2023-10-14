@@ -55,16 +55,6 @@ jobs:
         run: |
           export GOOGLE_APPLICATION_CREDENTIALS=google-creds.json
           gupload --to ${{ secrets.GDRIVE_FOLDER_ID }} --file "Package-${{ env.branch_name}}-${{ env.current_time}}.tar.gz" ./prepackage/PrePackage.tar.gz
-      - name: Checkout -b
-        run: git checkout -b gh-pages
-      - name: Push
-        run: git push origin gh-pages
-      - name: Install CLI GH Pages
-        run: npm install -g angular-cli-ghpages
-      - name: Build with base href
-        run: ng build --aot --base-href https://umganalisis2.github.io/FRONTEND/
-      - name: Deploy
-        run: ngh --dir=dist/pastelesfe
         
       
         
