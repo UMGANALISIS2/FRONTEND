@@ -55,11 +55,14 @@ jobs:
         run: |
           export GOOGLE_APPLICATION_CREDENTIALS=google-creds.json
           gupload --to ${{ secrets.GDRIVE_FOLDER_ID }} --file "Package-${{ env.branch_name}}-${{ env.current_time}}.tar.gz" ./prepackage/PrePackage.tar.gz
-      - name: Instalar Angular CLI GH Pages
-        run: npm i angular-cli-ghpages --save-dev
-      - name: Generar paquete para GH Pages
-        run: ng build --aot --base-href "https://umganalisis2.github.io/FRONTEND/"
-      - name: Deploy GH
-        run: npx angular-cli-ghpages --dir=dist/pastelesfe
+      - name: Crear rama GH
+        run: git branch gh-pages
+             git checkout gh-pages
+      - name: Build App
+        run: git checkout -b gh-pages
+          git push origin gh-pages
+          npm install -g angular-cli-ghpages
+          ng build --aot --base-href https://umganalisis2.github.io/FRONTEND/
+          ngh --dir=dist/pastelesfe
       
         
