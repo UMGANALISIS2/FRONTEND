@@ -1,0 +1,48 @@
+<div class="container-fluid bg-primary py-5 mb-5 hero-header">
+    <div class="container py-5">
+        <div class="row justify-content-start">
+            <div class="col-lg-8 text-center text-lg-start">
+                <h4 class="display-1 text-uppercase text-white mb-4">Búsqueda de pasteles</h4>
+                <h1 class="font-secondary text-primary mb-4">Ingrese su filtro</h1>
+                <div class="d-flex align-items-center justify-content-center justify-content-lg-start pt-5">
+                    <div class="container">
+                        <form [formGroup]="filterForm">
+                            <div formArrayName="filters">
+                              <div *ngFor="let filter of filters.controls; let i = index">
+                                <div class="row" [formGroupName]="i">
+                                  <div class="col-md-3">
+                                    <select class="form-select" formControlName="field">
+                                        <option selected disabled>Seleccione un campo</option>
+                                        <option value="family">Familia</option>
+                                        <option value="flavor">Sabor</option>
+                                        <option value="filling">Relleno</option>
+                                      </select>
+                                  </div>
+                                  <div class="col-md-3">
+                                    <select class="form-select" formControlName="operator">
+                                        <option selected disabled>Seleccione un operador</option>
+                                        <option value="equals">Igual (=)</option>
+                                        <option value="2">Y (&&)</option>
+                                        <option value="3">O (||)</option>
+                                      </select>
+                                  </div>
+                                  <div class="col-md-3">
+                                    <input formControlName="value" class="form-control" placeholder="Value">
+                                  </div>
+                                  <div class="col-md-3">
+                                    <button type="button" class="btn btn-danger" (click)="removeFilter(i)" [disabled]="i == 0">Eliminar</button>
+                                    <button type="button" class="btn btn-primary" (click)="addFilter()" [disabled]="!filters.at(i).valid || i != filters.controls.length - 1">+</button>
+                                    
+                                  </div>
+                                </div>
+                              </div>
+                              
+                            </div>
+                            
+                          </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>

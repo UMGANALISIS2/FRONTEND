@@ -22,6 +22,10 @@ export class NavbarComponent implements OnInit{
       {
         name: 'Menú',
         route: '/main/menu'
+      },
+      {
+        name: 'Buscar pasteles',
+        route: '/main/search'
       }
     ]
   }
