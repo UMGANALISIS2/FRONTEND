@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
+import { CakeService } from 'src/app/services/cake.service';
 
 @Component({
   selector: 'app-search',
@@ -9,8 +10,9 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class SearchComponent {
   filterForm: FormGroup;
+  cakes: any[] = [];
 
-  constructor(private _fb: FormBuilder){
+  constructor(private _fb: FormBuilder, private cakeService: CakeService){
     this.filterForm = this._fb.group({
       filters: this._fb.array([
         this._fb.group({
@@ -19,6 +21,12 @@ export class SearchComponent {
           value: ['', Validators.required]
         })
       ])
+    });
+
+    this.cakeService.getCakes()
+    .subscribe((e) => {
+      console.log(e)
+      this.cakes = e
     })
   }
 
