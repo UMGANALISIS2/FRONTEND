@@ -30,6 +30,10 @@ export class NavbarComponent implements OnInit{
       {
         name: 'Configurar rebajas',
         route: '/main/discounts'
+      },
+      {
+        name: 'Crear pastel',
+        route: '/main/create/'
       }
     ]
   }

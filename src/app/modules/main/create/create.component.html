@@ -1,1 +1,36 @@
-<p>create works!</p>
+ <h2>Formulario de Pasteles</h2>
+<form action="procesar_formulario.php" method="post">
+    <div class="mb-3">
+        <label for="name" class="form-label">Nombre:</label>
+        <input type="text" class="form-control" id="name" name="name" required>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Descripción:</label>
+        <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="family" class="form-label">Familia:</label>
+        <input type="text" class="form-control" id="family" name="family" required>
+    </div>
+    <div class="mb-3">
+        <label for="flavor" class="form-label">Sabor:</label>
+        <input type="text" class="form-control" id="flavor" name="flavor" required>
+    </div>
+    <div class="mb-3">
+        <label for="filling" class="form-label">Relleno:</label>
+        <input type="text" class="form-control" id="filling" name="filling" required>
+    </div>
+    <div class="mb-3">
+        <label for="price" class="form-label">Precio:</label>
+        <input type="number" step="0.01" class="form-control" id="price" name="price" required>
+    </div>
+    <div class="mb-3">
+        <label for="image" class="form-label">Imagen (URL):</label>
+        <input type="text" class="form-control" id="image" name="image" required>
+    </div>
+    <div class="mb-3">
+        <label for="thrudate" class="form-label">Fecha de Vencimiento:</label>
+        <input type="date" class="form-control" id="thrudate" name="thrudate" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+</form>
