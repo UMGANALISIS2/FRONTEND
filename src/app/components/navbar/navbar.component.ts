@@ -26,6 +26,10 @@ export class NavbarComponent implements OnInit{
       {
         name: 'Buscar pasteles',
         route: '/main/search'
+      },
+      {
+        name: 'Configurar rebajas',
+        route: '/main/discounts'
       }
     ]
   }
