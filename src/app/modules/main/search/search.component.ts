@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { CakeService } from 'src/app/services/cake.service';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-search',
@@ -12,7 +14,8 @@ export class SearchComponent {
   filterForm: FormGroup;
   cakes: any[] = [];
 
-  constructor(private _fb: FormBuilder, private cakeService: CakeService){
+  constructor(private _fb: FormBuilder, private cakeService: CakeService, 
+    private toast: ToastrService, private cart: CartService){
     this.filterForm = this._fb.group({
       filters: this._fb.array([
         this._fb.group({
@@ -26,7 +29,7 @@ export class SearchComponent {
     this.cakeService.getCakes()
     .subscribe((e) => {
       console.log(e)
-      this.cakes = e
+      this.cakes = e.result
     })
   }
 
@@ -45,6 +48,13 @@ export class SearchComponent {
 
   removeFilter(index: number) {
     this.filters.removeAt(index);
+  }
+
+  public addToCart(cake: any){
+    this.toast.success("Pastel añadido al carrito", "Carrito", {
+      timeOut: 4500
+    })
+    this.cart.addToCart(cake);
   }
 
 

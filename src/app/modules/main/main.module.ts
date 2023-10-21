@@ -9,6 +9,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CakeService } from 'src/app/services/cake.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CreateComponent } from './create/create.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { CartService } from 'src/app/services/cart.service';
 
 
 @NgModule({
@@ -22,8 +24,9 @@ import { CreateComponent } from './create/create.component';
     CommonModule,
     MainRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SweetAlert2Module
   ],
-  providers: [CakeService]
+  providers: [CakeService, CartService]
 })
 export class MainModule { }
