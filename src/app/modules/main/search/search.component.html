@@ -21,24 +21,34 @@
                                   <div class="col-md-3">
                                     <select class="form-select" formControlName="operator">
                                         <option selected disabled>Seleccione un operador</option>
-                                        <option value="equals">Igual (=)</option>
-                                        <option value="2">Y (&&)</option>
-                                        <option value="3">O (||)</option>
+                                        <option value="AND">Y (&&)</option>
+                                        <option value="OR">O (||)</option>
                                       </select>
                                   </div>
                                   <div class="col-md-3">
-                                    <input formControlName="value" class="form-control" placeholder="Value">
+                                    <select class="form-select" formControlName="values" *ngIf="filters.at(i).get('field')?.value == 'family'">
+                                      <option selected disabled>Seleccione un valor</option>
+                                      <option *ngFor="let fam of families" [value]="fam.name">{{fam.description}}</option>
+                                    </select>
+                                    <select class="form-select" formControlName="values" *ngIf="filters.at(i).get('field')?.value == 'flavor'">
+                                      <option selected disabled>Seleccione un valor</option>
+                                      <option *ngFor="let flavor of flavors" [value]="flavor.name">{{flavor.description}}</option>
+                                    </select>
+                                    <select class="form-select" formControlName="values" *ngIf="filters.at(i).get('field')?.value == 'filling'">
+                                      <option selected disabled>Seleccione un valor</option>
+                                      <option *ngFor="let filling of fillings" [value]="filling.name">{{filling.description}}</option>
+                                    </select>
                                   </div>
                                   <div class="col-md-3">
                                     <button type="button" class="btn btn-danger" (click)="removeFilter(i)" [disabled]="i == 0">Eliminar</button>
                                     <button type="button" class="btn btn-primary" (click)="addFilter()" [disabled]="!filters.at(i).valid || i != filters.controls.length - 1">+</button>
-                                    
                                   </div>
                                 </div>
                               </div>
                               
                             </div>
-                            
+                            <button type="button" class="btn btn-primary" [disabled]="!filterForm.valid" (click)="applyFilters()">Buscar</button>&nbsp;
+                            <button type="button" class="btn btn-danger" [disabled]="!filterForm.valid" (click)="cleanFilters()">Limpiar filtros</button>
                           </form>
                     </div>
                 </div>
@@ -47,7 +57,7 @@
     </div>
   </div>
 
-  <div class="container-fluid about py-5">
+  <div class="container-fluid about py-5" *ngIf="cakes && cakes.length > 0">
     <div class="container">
         <div class="section-title position-relative text-center mx-auto mb-5 pb-3" style="max-width: 600px;">
             <h2 class="text-primary font-secondary">Resultados de la búsqueda:</h2>
@@ -76,6 +86,14 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+  </div>
+  <div class="container-fluid about py-5" *ngIf="filterForm.touched && filterForm.dirty && cakes && cakes.length == 0">
+    <div class="container">
+        <div class="section-title position-relative text-center mx-auto mb-5 pb-3" style="max-width: 600px;">
+            <h2 class="text-primary font-secondary">Resultados de la búsqueda:</h2>
+            <h1 class="display-4 text-uppercase">No se encontraron pasteles con esos filtros</h1>
         </div>
     </div>
   </div>

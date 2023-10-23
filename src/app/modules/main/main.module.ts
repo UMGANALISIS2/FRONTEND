@@ -11,6 +11,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { CreateComponent } from './create/create.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { CartService } from 'src/app/services/cart.service';
+import { FamilyService } from 'src/app/services/family.service';
+import { FillingService } from 'src/app/services/filling.service';
+import { FlavorService } from 'src/app/services/flavor.service';
 
 
 @NgModule({
@@ -27,6 +30,6 @@ import { CartService } from 'src/app/services/cart.service';
     ReactiveFormsModule,
     SweetAlert2Module
   ],
-  providers: [CakeService, CartService]
+  providers: [CakeService, CartService, FamilyService, FillingService, FlavorService]
 })
 export class MainModule { }

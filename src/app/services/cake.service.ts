@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FormArray } from '@angular/forms';
 import { map } from 'rxjs';
 
 @Injectable()
@@ -16,6 +17,14 @@ export class CakeService {
   public getCakes(){
     return this.http.get("https://localhost:7147/cakes/catalog", {
       headers: this.headers
+    })
+    .pipe(map(this.extractData))
+  }
+
+  public getFilteredCakes(filters: any[]){
+    console.log(filters)
+    return this.http.post("https://localhost:7147/cakes/filter", {
+      filters: filters
     })
     .pipe(map(this.extractData))
   }
