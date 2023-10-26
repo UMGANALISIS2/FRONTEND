@@ -21,8 +21,8 @@
                                   <div class="col-md-3">
                                     <select class="form-select" formControlName="operator">
                                         <option selected disabled>Seleccione un operador</option>
-                                        <option value="AND">Y (&&)</option>
-                                        <option value="OR">O (||)</option>
+                                        <option value="AND">Y</option>
+                                        <option value="OR">O</option>
                                       </select>
                                   </div>
                                   <div class="col-md-3">
@@ -47,6 +47,8 @@
                               </div>
                               
                             </div>
+                            <br />
+                            <br />
                             <button type="button" class="btn btn-primary" [disabled]="!filterForm.valid" (click)="applyFilters()">Buscar</button>&nbsp;
                             <button type="button" class="btn btn-danger" [disabled]="!filterForm.valid" (click)="cleanFilters()">Limpiar filtros</button>
                           </form>
