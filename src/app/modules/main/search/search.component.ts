@@ -15,12 +15,14 @@ import { FlavorService } from 'src/app/services/flavor.service';
 })
 export class SearchComponent {
   filterForm: FormGroup;
+  searchForm: FormGroup;
   cakes: any[] = [];
   families: any[] = [];
   fillings: any[] = [];
   flavors: any[] = [];
 
   valueOpts: any[] = [];
+  selectedCake:any = null;
 
   constructor(private _fb: FormBuilder, private cakeService: CakeService, 
     private toast: ToastrService, private cart: CartService, 
@@ -36,19 +38,17 @@ export class SearchComponent {
         })
       ])
     });
+    
+    this.searchForm = this._fb.group({
+      query: ['', Validators.required]
+    })
   
 
     this.familyService.getFamilies()
     .subscribe((e) => {
       if(e.success== true){
-        this.toast.success("Familia de pasteles cargada correctamente", "Catálogos", {
-          timeOut: 4000
-        })
         this.families = e.result
       }else{
-        this.toast.error("Error al cargar las familias de pasteles", "Catálogos", {
-          timeOut: 4000
-        })
         this.families = []
       }
     })
@@ -56,14 +56,8 @@ export class SearchComponent {
     this.fillingService.getFillings()
     .subscribe((e) => {
       if(e.success== true){
-        this.toast.success("Rellenos de pasteles cargada correctamente", "Catálogos", {
-          timeOut: 4000
-        })
         this.fillings = e.result
       }else{
-        this.toast.error("Error al cargar los rellenos de pasteles", "Catálogos", {
-          timeOut: 4000
-        })
         this.fillings = []
       }
     })
@@ -71,14 +65,8 @@ export class SearchComponent {
     this.flavorService.getFlavors()
     .subscribe((e) => {
       if(e.success== true){
-        this.toast.success("Sabores de pasteles cargada correctamente", "Catálogos", {
-          timeOut: 4000
-        })
         this.flavors = e.result
       }else{
-        this.toast.error("Error al cargar los sabores de pasteles", "Catálogos", {
-          timeOut: 4000
-        })
         this.flavors = []
       }
     })
@@ -112,12 +100,7 @@ export class SearchComponent {
 
   public applyFilters(){
     this.cakes = [];
-    let filters = this.filters.getRawValue();
-    filters.forEach((f) => {
-      f.values = [f.values]
-      console.log(f)
-    })
-    this.cakeService.getFilteredCakes(filters)
+    this.cakeService.getFilteredCakes(this.searchForm.controls['query'].value)
     .subscribe((e) => {
       this.cakes = e.result;
     })

@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormArray } from '@angular/forms';
 import { map } from 'rxjs';
+import { Cake } from '../models/Cake';
 
 @Injectable()
 export class CakeService {
@@ -21,11 +22,15 @@ export class CakeService {
     .pipe(map(this.extractData))
   }
 
-  public getFilteredCakes(filters: any[]){
-    console.log(filters)
+  public getFilteredCakes(query: string){
     return this.http.post("https://localhost:7147/cakes/filter", {
-      filters: filters
+      query: query
     })
+    .pipe(map(this.extractData))
+  }
+
+  public addCake(cake: Cake){
+    return this.http.post("https://localhost:7147/cakes/create", cake)
     .pipe(map(this.extractData))
   }
 }
