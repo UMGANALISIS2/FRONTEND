@@ -19,23 +19,37 @@ export class NavbarComponent implements OnInit{
     this.menus = [
       {
         name: 'Inicio',
-        route: '/main/home'
+        route: '/main/home',
+        type: 'simple'
       },
       {
         name: 'Menú',
-        route: '/main/menu'
+        route: '/main/menu',
+        type: 'simple'
       },
       {
         name: 'Buscar pasteles',
-        route: '/main/search'
+        route: '/main/search',
+        type: 'simple'
       },
       {
-        name: 'Configurar rebajas',
-        route: '/main/discounts'
-      },
-      {
-        name: 'Crear pastel',
-        route: '/main/create/'
+        name: 'Otros',
+        route: null,
+        type: 'dropdown',
+        children: [
+          {
+            name: 'Crear pastel',
+            route: '/main/create'
+          },
+          {
+            name: 'Config. rebajas',
+            route: '/main'
+          },
+          {
+            name: 'Crear orden',
+            route: '/main/order/create'
+          }
+        ]
       }
     ]
   }

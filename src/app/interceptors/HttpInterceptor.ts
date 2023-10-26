@@ -9,11 +9,12 @@ import {
 import { Observable, catchError, finalize, throwError } from 'rxjs';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class HttpReqInterceptor implements HttpInterceptor {
 
-  constructor(private loader: NgxUiLoaderService, private router: Router) {}
+  constructor(private loader: NgxUiLoaderService, private router: Router, private toast: ToastrService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     // const token = localStorage.getItem('shoppaytoken') ?? null;
@@ -29,6 +30,24 @@ export class HttpReqInterceptor implements HttpInterceptor {
     this.loader.start();
     return next.handle(request).pipe(
       catchError((error: any) => {
+        if(error instanceof HttpErrorResponse){
+          switch(error.status){
+            case 0:
+              this.toast.error(`No se pudo acceder al recurso ${error.url}. 
+              Puede ser que los servidores estén apagados. Intente más tarde`, "Error del sistema", {
+                timeOut: 6000,
+                tapToDismiss: true
+              })
+            break;
+            default:
+              this.toast.warning(`Ocurrió un error inesperado: 
+              Código: ${error.status}.`, "Error del sistema", {
+                timeOut: 6000,
+                tapToDismiss: true
+              })
+          }
+        }
+        
         // if(error instanceof HttpErrorResponse){
         //   switch(error.status){
         //     case 0:
