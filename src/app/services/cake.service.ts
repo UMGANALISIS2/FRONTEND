@@ -22,9 +22,9 @@ export class CakeService {
     .pipe(map(this.extractData))
   }
 
-  public getFilteredCakes(query: string){
+  public getFilteredCakes(filters: any[]){
     return this.http.post("https://localhost:7147/cakes/filter", {
-      query: query
+      filters: filters
     })
     .pipe(map(this.extractData))
   }
