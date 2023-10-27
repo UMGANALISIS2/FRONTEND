@@ -58,6 +58,10 @@ export class NavbarComponent implements OnInit{
             route: '/orders/create'
           },
           {
+            name: 'Listar órdenes',
+            route: '/orders/all'
+          },
+          {
             name: 'Config. rebajas',
             route: '/main'
           }

@@ -22,6 +22,13 @@ export class CakeService {
     .pipe(map(this.extractData))
   }
 
+  public getCakesOnStock(){
+    return this.http.get("https://localhost:7147/cakes/catalog/instock", {
+      headers: this.headers
+    })
+    .pipe(map(this.extractData))
+  }
+
   public getFilteredCakes(filters: any[]){
     return this.http.post("https://localhost:7147/cakes/filter", {
       filters: filters

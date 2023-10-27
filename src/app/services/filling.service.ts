@@ -17,4 +17,8 @@ export class FillingService {
     .pipe(map(this.extractData))
   }
 
+  public saveFilling(body: any){
+    return this.http.post("https://localhost:7147/filling/create", body)
+    .pipe(map(this.extractData));
+  }
 }

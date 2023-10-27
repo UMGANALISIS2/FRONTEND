@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 
 @Injectable()
-export class FlavorService {
+export class ClientService {
 
   constructor(private http: HttpClient) { }
 
@@ -12,14 +12,13 @@ export class FlavorService {
     return data || [] || {};
   }
 
-  public getFlavors(){
-    return this.http.get("https://localhost:7147/flavor/catalog")
-    .pipe(map(this.extractData))
-  }
-
-  public saveFlavor(body: any){
-    return this.http.post("https://localhost:7147/flavor/create", body)
+  public getClients(){
+    return this.http.get("https://localhost:7147/clients/all")
     .pipe(map(this.extractData));
   }
-
+  
+  public saveClient(body: any){
+    return this.http.post("https://localhost:7147/clients/create", body)
+    .pipe(map(this.extractData));
+  }
 }

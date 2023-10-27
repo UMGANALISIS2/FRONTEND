@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common';
 import { FlavorsRoutingModule } from './flavors-routing.module';
 import { CreateComponent } from './create/create.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FlavorService } from 'src/app/services/flavor.service';
+import { ToastrService } from 'ngx-toastr';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -13,7 +16,9 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     FlavorsRoutingModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    HttpClientModule
+  ],
+  providers: [FlavorService, ToastrService]
 })
 export class FlavorsModule { }
