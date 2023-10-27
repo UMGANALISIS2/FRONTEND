@@ -38,17 +38,30 @@ export class NavbarComponent implements OnInit{
         type: 'dropdown',
         children: [
           {
+            name: 'Crear sabor',
+            route: '/flavors/create'
+          },
+          {
+            name: 'Crear relleno',
+            route: '/fillings/create'
+          },
+          {
             name: 'Crear pastel',
             route: '/main/create'
           },
           {
-            name: 'Config. rebajas',
-            route: '/main'
+            name: 'Crear cliente',
+            route: '/clients/create'
           },
           {
             name: 'Crear orden',
-            route: '/main/order/create'
+            route: '/orders/create'
+          },
+          {
+            name: 'Config. rebajas',
+            route: '/main'
           }
+          
         ]
       }
     ]
